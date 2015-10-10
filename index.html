@@ -1,264 +1,108 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<!-- Include Bootstrap css via CDN -->
-		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-		<!-- Optional theme -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-		<!-- Include javascript portions of bootstrap -->
-		<!-- Latest compiled and minified JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-		
-		<title>Exercise 1: Kyle Burkett</title>
-		
-		<!-- type out some js to process the data entered by user -->
-		<script type="text/javascript">
-			function toTitleCase(str) //capitalizes the first letter of each name and uncapitalizes the rest
-					{
-					    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
-					}
-			
-			function ProcessThisIsh(){
-				var e_name = document.forms["GetData"]["employee_name"].value;
-				e_name = toTitleCase(e_name);
-				var e_salr = document.forms["GetData"]["employee_salary"].value;
-				if (e_name == null || e_name == "" || e_salr == null || e_salr == "")
+<html lang="en">
+<head>
+  <title>Kyle Burkett: Exercise 1</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <!-- type out some js to process the data entered by user -->
+	<script>
+		function toTitleCase(str) //capitalizes the first letter of each name and uncapitalizes the rest
 				{
-					alert("Please enter both an employee name and their yearly salary");
-					return false;
+				    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 				}
-				else alert("Archiving: " + e_name + " should receive a Christmas bonus of " + e_salr*.1);
-				
-				
-			}
-		</script>
 		
-		<style>
-			@gray: #333;
-			@gray-light: #aaa;
-			@gray-lighter: #eee;
-			@space: 40px;
-			@blue: #428bca;
-			@blue-dark: darken(@blue, 5%);
-			
-			// Mixin for transition/transform
-			.translate(@x; @y) {
-			  -webkit-transform: translate(@x, @y);
-			      -ms-transform: translate(@x, @y); // IE9+
-			          transform: translate(@x, @y);
+		function ProcessThisIsh(){
+			var e_name = document.forms["GetData"]["employee_name"].value;
+			e_name = toTitleCase(e_name);
+			var e_salr = document.forms["GetData"]["employee_salary"].value;
+			if (e_name == null || e_name == "" || e_salr == null || e_salr == "")
+			{
+				alert("Please enter both an employee name and their yearly salary");
+				return false;
 			}
-			.transition(@transition) {
-			  -webkit-transition: @transition;
-			          transition: @transition;
-			}
-			.transition-transform(@transition) {
-			  -webkit-transition: -webkit-transform @transition;
-			     -moz-transition: -moz-transform @transition;
-			       -o-transition: -o-transform @transition;
-			          transition: transform @transition;
-			}
+			else alert("Archiving: " + e_name + " should receive a Christmas bonus of " + e_salr*.1);
 			
-			//
-			// Body
-			// ----------------------
 			
-			body{
-			  color: @gray;
-			  font-family: 'Helvetica', arial;
-			  height: 80em;
-			}
-			
-			.wrap{
-			  padding: @space;
-			  text-align: center;
-			}
-			
-			hr {
-			  clear: both;
-			  margin-top: @space;
-			  margin-bottom: @space;
-			  border: 0;
-			  border-top: 1px solid @gray-light;
-			}
-			
-			h1{
-			  font-size: 30px;
-			  margin-bottom: @space;
-			}
-			
-			p{
-			  margin-bottom: @space/2;
-			}
-			
-			//
-			// Btn 
-			// ----------------------
-			
-			.btn{
-			  background: @blue;
-			  border: @blue-dark solid 1px;
-			  border-radius: 3px;
-			  color: #fff;
-			  display: inline-block;
-			  font-size: 14px;
-			  padding: 8px 15px;
-			  text-decoration: none;
-			  text-align: center;
-			  min-width: 60px;
-			  position: relative;
-			  transition: color .1s ease;
-			 /* top: 40em;*/
-			  
-			  &:hover{
-			    background: @blue-dark;
-			  }
-			  
-			  &.btn-big{
-			    font-size: 18px;
-			    padding: 15px 20px;
-			    min-width: 100px;
-			  }
-			  
-			}
-			
-			.btn-close{
-			  color: @gray-light;
-			  font-size: 30px;
-			  text-decoration: none;
-			  position: absolute; right: 5px; top: 0;
-			  
-			  &:hover{
-			     color: darken(@gray-light, 10%);
-			  }
-			  
-			}
-			
-			//
-			// Modal
-			// ----------------------
-			
-			.modal{
-			  
-			   
-			  // This is modal bg
-			  &:before{
-			    content: ""; 
-			    display: none;
-			    background: rgba(0,0,0,.6);
-			    position: fixed;
-			    top: 0; left: 0; right: 0; bottom: 0; 
-			    z-index: 10;
-			  }
-			  
-			  &:target{
-			     
-			    // Active animate in modal
-			    &:before{
-			      display: block;
-			    }  
-			    .modal-dialog{
-			      .translate(0, 0); 
-			      top: 20%;  
-			    }
-			     
-			  }
-			  
-			}
-			
-			// Modal Dialog
-			// ----------------------
-			
-			.modal-dialog{
-			  background: #fefefe;
-			  border: @gray solid 1px;
-			  border-radius: 5px;
-			  margin-left: -200px;
-			  position: fixed; 
-			  left: 50%; 
-			  top: -100%;  
-			  z-index: 11; 
-			  width: 360px;
-			  .translate(0, -500%);
-			  .transition-transform(~"0.3s ease-out");
-			}
-			
-			.modal-body{
-			  padding: @space/2;
-			}
-			
-			.modal-header,
-			.modal-footer{
-			  padding: @space/4 @space/2;
-			}
-			
-			.modal-header{
-			  border-bottom: @gray-lighter solid 1px;
-			  
-			  h2{
-			    font-size: 20px;
-			  }
-			  
-			}
-			
-			.modal-footer{
-			  border-top: @gray-lighter solid 1px;
-			  text-align: right;
-			}
-			
-			/*ADDED TO STOP SCROLLING TO TOP*/
-			#close {
-			  display: none; 
-			}
-			
+		}
+	</script>
+</head>
+<body>
+	
+<div class="wrap"> 
+<h1 align="center">Christmas Bonus Calculator</h1>
+<p align="center">Enter an employees' name and their salary. I will calculate the bonus and keep track for you. All for free.</p> <br><br>
+</div>
 
-		</style>
-	</head>
-	<body>
-		
-		<div class="wrap"> 
-			<h1>Christmas Bonus Calculator</h1>
-			<p>Enter an employees' name and their salary. I will calculate the bonus and keep track for you. All for free.</p> <br><br>
+<!-- table for recording entries -->
+<div class="row">
+	<div class="col-md-3"><!--quick spacer :)--></div>
+	<div class="col-md-6">
+		<div class="table-responsive">
+			<table class="table table-striped table-bordered">
+				<thead>
+					<td>Employee Name</td>
+					<td>Employee Salary</td>
+					<td>Employee Bonus</td>
+					<td>Delete Employee</td>
+				</thead>
+				<tbody>
+					<td>Test Name</td>
+					<td>Test Salary</td>
+					<td>Test Bonus</td>
+					<td><button type="button" class="btn btn-default">Delete</button></td>
+				</tbody>
+			</table>
 		</div>
-			<div class="row">
-    			<div class="col-md-3"><!--quick spacer :)--></div>
-	    		<div class="col-md-6">
-	    			<div class="table-responsive">
-	    				<table class="table table-striped table-bordered">
-	    					<thead>
-	    						<td>Employee Name</td>
-	    						<td>Employee Salary</td>
-	    						<td>Employee Bonus</td>
-	    						<td>Delete Employee</td>
-	    					</thead>
-	    					<tbody>
-	    						<td>Test Name</td>
-	    						<td>Test Salary</td>
-	    						<td>Test Bonus</td>
-	    						<td><button type="button" class="btn btn-default">Delete</button></td>
-	    					</tbody>
-	    				</table>
-	    			</div>
-    			</div>
-    		</div>
-			<div class="row">
-				<div class="col-md-2">
-					<form name="GetData" onsubmit="ProcessThisIsh()" method="post">
-					  <div class="form-group">
-					    <label for="employee_name">Enter An Employee's Name:</label>
-					    <input type="text" class="form-control" id="employee_name" placeholder="Sally Jenkins">
-					    <label for="employee_salary">Enter Their Yearly Salary:</label>
-					    <input type="number" class="form-control" id="employee_salary" placeholder="100000">
-					  </div>
-					  <button type="submit" class="btn btn-default">Submit</button>
-					</form>
-				<br><br>
-				</div>
-    		</div>
- 
+	</div>
+</div>
+
+<div class="container">
+<div class="col-md-5"><!--quick spacer :)--></div>	
+  <!-- Trigger the modal with a button -->
+  <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal">Enter New Employee</button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <img src="wordmark-print.png" class="img-responsive" alt="Clemson!" align="center">
+        </div>
+        <div class="modal-body">
+          <p>
+          	<form name="GetData" onsubmit="ProcessThisIsh()" method="post">
+			  <div class="form-group">
+			    <label for="employee_name">Enter An Employee's Name:</label>
+			    <input type="text" class="form-control" id="employee_name" placeholder="Sally Jenkins">
+			    <label for="employee_salary">Enter Their Yearly Salary:</label>
+			    <input type="number" class="form-control" id="employee_salary" placeholder="100000">
+			  </div>
+			  <button type="submit" class="btn btn-default">Submit</button>
+			</form>      		
+  		</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+
+<div class="row">
+	<div class="col-md-3" "col-xs-3">
+		
+	</div>
+</div>
 
 
-	</body>
+</body>
 </html>
