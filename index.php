@@ -20,7 +20,7 @@
 	
 <div class="wrap"> 
 <h1 align="center">Christmas Bonus Calculator</h1>
-<p align="center">Enter an employees' name and their salary. I will calculate the bonus and keep track for you. All for free.</p> <br><br>
+<p align="center">Enter an employee's name and their salary. I will calculate the bonus and keep track for you. All for free.</p> <br><br>
 </div>
 
 <!-- table for recording entries -->
@@ -28,20 +28,39 @@
 	<div class="col-md-3"><!--quick spacer :)--></div>
 	<div class="col-md-6">
 		<div class="table-responsive">
-			<table class="table table-striped table-bordered" id="populate_table">
-				<thead>
-					<td>Employee Name</td>
-					<td>Employee Salary</td>
-					<td>Employee Bonus</td>
-					<td>Delete Employee</td>
-				</thead>
-				<tbody>
-					<td>Name</td>
-					<td>Salary</td>
-					<td>Bonus</td>
-					<td><button type="button" class="btn btn-default">Delete</button></td>
-				</tbody>
-			</table>
+			<!-- load table data with php -->
+				<?php
+					require_once('db_connect.php');
+					  $sql = "SELECT * FROM example1";
+					  $result = mysql_query($sql)or die(mysql_error());	
+					  if(isset($_REQUEST['delete']))
+						{
+						$sql_s =" DELETE FROM `example1` WHERE id='".$_REQUEST['id']."' " ;
+						$result_s = mysql_query($sql_s)or die(mysql_error());
+						if($result_s == true)
+						{
+						header("Refresh:0");
+						}
+						else
+						{
+						echo '<script language="javascript">alert("Error in deletion")</script>';
+						}
+						}
+					  echo "<table class='table table-striped table-bordered' id='populate_table'>";
+					  echo "<thead><td>Employee Name</td><td>Employee Salary</td><td>Employee Bonus</td><td>Delete Employee</td></thead><tbody>";				 
+					  while($row = mysql_fetch_array($result)){
+					  					 
+					  $name     = $row['name'];
+					  $salary   = $row['salary'];
+					  $bonus    = $row['bonus'];
+					  $id       = $row['id'];
+					  
+					// populate table with queried data
+					echo "<tr><td>".$name."</td><td>".$salary."</td><td>".$bonus."</td>"."<td><form method='post'><input type='submit' class='btn btn-default' name='delete' value='Delete'><input type='hidden' name='id' value='".$row['id']."'></form></td></tr>";
+					 
+					} 
+					echo"</tbody></table>"
+				?>
 			<span id="result"></span>
 		</div>
 	</div>
