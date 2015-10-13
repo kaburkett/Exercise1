@@ -1,5 +1,5 @@
 <?php
-$link = mysql_connect(insert connection here);
+$link = mysql_connect('insert db connection here');
 if (!$link) {
     die('Could not connect: ' . mysql_error());
 }

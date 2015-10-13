@@ -32,7 +32,15 @@
 				<?php
 					require_once('db_connect.php');
 					  $sql = "SELECT * FROM example1";
-					  $result = mysql_query($sql)or die(mysql_error());	
+					  $result_s = mysql_query($sql)or die(mysql_error());	
+					  $orderBy = array('name', 'salary', 'bonus', 'id');
+					  $order = 'type';
+					  if (isset($_GET['orderBy']) && in_array($_GET['orderBy'], $orderBy)) 
+					  	{
+					    $order = $_GET['orderBy'];
+						$sql_s = 'SELECT * FROM example1 ORDER BY '.$order;
+						$result_s = mysql_query($sql_s)or die(mysql_error());
+						}
 					  if(isset($_REQUEST['delete']))
 						{
 						$sql_s =" DELETE FROM `example1` WHERE id='".$_REQUEST['id']."' " ;
@@ -47,8 +55,8 @@
 						}
 						}
 					  echo "<table class='table table-striped table-bordered' id='populate_table'>";
-					  echo "<thead><td>Employee Name</td><td>Employee Salary</td><td>Employee Bonus</td><td>Delete Employee</td></thead><tbody>";				 
-					  while($row = mysql_fetch_array($result)){
+					  echo "<thead><td><a href='index.php?orderBy=name'>Employee Name:</a></td><td><a href='index.php?orderBy=salary'>Employee Salary:</a></td><td><a href='index.php?orderBy=bonus'>Employee Bonus:</a></td><td><a href='index.php?orderBy=id'>Delete:</a></td></thead><tbody>";				 
+					  while($row = mysql_fetch_array($result_s)){
 					  					 
 					  $name     = $row['name'];
 					  $salary   = $row['salary'];
@@ -86,9 +94,9 @@
           	<form name="GetData" action="" method="post">
 			  <div class="form-group">
 			    <label for="employee_name">Enter An Employee's Name:</label>
-			    <input type="text" class="form-control" id="employee_name" name="employee_name" placeholder="Sally Jenkins" />
+			    <input type="text" class="form-control" id="employee_name" name="employee_name" placeholder="Sally Jenkins" required/>
 			    <label for="employee_salary">Enter Their Yearly Salary:</label>
-			    <input type="number" class="form-control" id="employee_salary" name="employee_salary" placeholder="100000" />
+			    <input type="number" class="form-control" id="employee_salary" name="employee_salary" placeholder="100000" required/>
 			  </div>
 			  <button class="btn btn-default" id="new_entry">Submit</button>
 			</form>      		
