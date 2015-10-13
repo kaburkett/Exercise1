@@ -1,5 +1,4 @@
-# Exercise1
-Programmer II Exercise
+<h2>Live Demo: <a href="http://openvbx.credit1source.com/Exercise1">Exercise 1</a></h2>
 
 <h2> Features for Functionality Requirements </h2>
 Here I will list each functional requirement, and how I fulfilled that requirement in my code. Below I have listed a label for each requirement and the requirement verbatim in quotes.
